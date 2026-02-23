@@ -65,6 +65,9 @@ async def main():
     need_notify = False  # 是否需要发送通知
 
     for i, account_config in enumerate(app_config.accounts):
+        if i > 0:
+            print("⏳ Waiting 60s before next account to avoid rate limiting...")
+            await asyncio.sleep(60)
         account_key = f"account_{i + 1}"
         account_name = account_config.get_display_name(i)
         if len(notification_content) > 0:
